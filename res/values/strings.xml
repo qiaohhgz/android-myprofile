@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MyProfile</string>
+    <string name="pick_time_btn">PickTime</string>
+    <string name="start_service">Start Service</string>
+    <string name="stop_service">Stop Service</string><string name="add_name">Profile Name</string><string name="add_desc">Profile description</string><string name="add_save">Save</string><string name="add_disable">Disable</string>
+    <string name="add_title">Add Profile</string>
+    <string name="list_title">Profile List</string><string name="gotoList">Go To List</string><string name="gotoAdd">Go To Add</string>
+</resources>

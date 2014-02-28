@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+        >
+
+    <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/add_name" android:layout_gravity="left|center_vertical" android:hint="@string/add_name"/>
+    <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/add_desc" android:layout_gravity="left|center_vertical" android:hint="@string/add_desc"/>
+    <ToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_disable"
+            android:id="@+id/add_disable_Btn" android:layout_gravity="left|center_vertical" android:enabled="true"
+            android:checked="false" android:hint="@string/add_disable"/>
+    <Button
+            android:layout_width="72dp"
+            android:layout_height="wrap_content"
+            android:text="@string/add_save"
+            android:id="@+id/add_save_Btn" android:layout_gravity="center" android:gravity="center"/>
+</LinearLayout>
+
