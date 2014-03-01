@@ -40,10 +40,10 @@ public abstract class BaseDao extends SQLiteOpenHelper {
         return DB_NAME;
     }
 
-    public void insert(ContentValues values) {
+    public long insert(ContentValues values) {
         db = getWritableDatabase();
-        db.insert(getTableName(), null, values);
-        db.close();
+        long id = db.insert(getTableName(), null, values);
+        return id;
     }
 
     public void del(int id) {

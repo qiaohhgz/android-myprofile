@@ -10,10 +10,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.SimpleCursorAdapter;
 import com.jim.example.myProfile.db.dao.DBHelper;
-import com.jim.example.myProfile.db.dao.ProfileDao;
 import com.jim.example.myProfile.db.dao.TableMapping;
 
-public class ListProfileActivity extends ListActivity implements AdapterView.OnItemClickListener {
+public class ListEventActivity extends ListActivity implements AdapterView.OnItemClickListener {
     private static String TAG;
     private DBHelper helper = new DBHelper(this);
 
@@ -29,10 +28,10 @@ public class ListProfileActivity extends ListActivity implements AdapterView.OnI
     }
 
     private void displayData() {
-        Cursor query = helper.getReadableDatabase().query(TableMapping.Profile.getTableName(), null, null, null, null, null, null);
-        String[] from = {"name", "description", "createDate", "disable"};
-        int[] to = {R.id.item_name, R.id.item_desc, R.id.item_create_date, R.id.item_disable_btn};
-        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.profile_list_item, query, from, to);
+        Cursor query = helper.getReadableDatabase().query(TableMapping.timeEveryDayEvent.getTableName(), null, null, null, null, null, null);
+        String[] from = {"profileID", "hour", "minute"};
+        int[] to = {R.id.item_event_profileID, R.id.item_event_hour, R.id.item_event_minute};
+        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.event_list_item, query, from, to);
 
         getListView().setAdapter(adapter);
     }
@@ -50,8 +49,8 @@ public class ListProfileActivity extends ListActivity implements AdapterView.OnI
         builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int which) {
-                int profileID = helper.getWritableDatabase().delete(TableMapping.Profile.getTableName(), "_id=?", new String[]{String.valueOf(id)});
-                Log.d(TAG, "Delete profileID = " + profileID);
+                int eventID = helper.getWritableDatabase().delete(TableMapping.timeEveryDayEvent.getTableName(), "_id=?", new String[]{String.valueOf(id)});
+                Log.d(TAG, "Delete eventID = " + eventID);
                 displayData();
             }
         });

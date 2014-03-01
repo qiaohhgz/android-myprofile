@@ -3,7 +3,24 @@
     <string name="app_name">MyProfile</string>
     <string name="pick_time_btn">PickTime</string>
     <string name="start_service">Start Service</string>
-    <string name="stop_service">Stop Service</string><string name="add_name">Profile Name</string><string name="add_desc">Profile description</string><string name="add_save">Save</string><string name="add_disable">Disable</string>
-    <string name="add_title">Add Profile</string>
-    <string name="list_title">Profile List</string><string name="gotoList">Go To List</string><string name="gotoAdd">Go To Add</string>
+    <string name="stop_service">Stop Service</string>
+    <string name="add_name">Profile Name</string>
+    <string name="add_desc">Profile description</string>
+    <string name="add_save">Save</string>
+    <string name="add_disable">Disable</string>
+    <string name="add_profile_title">Add Profile</string>
+    <string name="list_profile_title">Profile List</string>
+    <string name="gotoAdd">Go To Add</string>
+    <string name="add_event_label">Add Event</string>
+    <string name="time_save_btn">Save</string>
+    <string name="task_sound_title">Tasks</string>
+    <string name="task_ring_title">Ring</string>
+    <string name="btn_pick_time">Pick Time</string>
+    <string name="lbl_ring">Ring</string>
+    <string name="lbl_disable">Disable</string>
+    <string name="list_event_title">Event List</string>
+    <string name="btn_goto_task_List">Profile List</string>
+    <string name="btn_goto_task_list">Task List</string>
+    <string name="btn_goto_event_list">Event List</string>
+    <string name="list_task_title">Task List</string>
 </resources>

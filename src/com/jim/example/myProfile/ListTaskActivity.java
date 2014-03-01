@@ -10,10 +10,16 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.SimpleCursorAdapter;
 import com.jim.example.myProfile.db.dao.DBHelper;
-import com.jim.example.myProfile.db.dao.ProfileDao;
 import com.jim.example.myProfile.db.dao.TableMapping;
 
-public class ListProfileActivity extends ListActivity implements AdapterView.OnItemClickListener {
+/**
+ * Created with IntelliJ IDEA.
+ * User: Jim_qiao
+ * Date: 14-3-2
+ * Time: 上午12:06
+ * To change this template use File | Settings | File Templates.
+ */
+public class ListTaskActivity extends ListActivity implements AdapterView.OnItemClickListener {
     private static String TAG;
     private DBHelper helper = new DBHelper(this);
 
@@ -29,10 +35,10 @@ public class ListProfileActivity extends ListActivity implements AdapterView.OnI
     }
 
     private void displayData() {
-        Cursor query = helper.getReadableDatabase().query(TableMapping.Profile.getTableName(), null, null, null, null, null, null);
-        String[] from = {"name", "description", "createDate", "disable"};
-        int[] to = {R.id.item_name, R.id.item_desc, R.id.item_create_date, R.id.item_disable_btn};
-        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.profile_list_item, query, from, to);
+        Cursor query = helper.getReadableDatabase().query(TableMapping.SoundTask.getTableName(), null, null, null, null, null, null);
+        String[] from = {"profileID", "ring"};
+        int[] to = {R.id.item_task_profileID, R.id.item_task_ring};
+        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.task_list_item, query, from, to);
 
         getListView().setAdapter(adapter);
     }
@@ -50,8 +56,8 @@ public class ListProfileActivity extends ListActivity implements AdapterView.OnI
         builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int which) {
-                int profileID = helper.getWritableDatabase().delete(TableMapping.Profile.getTableName(), "_id=?", new String[]{String.valueOf(id)});
-                Log.d(TAG, "Delete profileID = " + profileID);
+                int taskID = helper.getWritableDatabase().delete(TableMapping.SoundTask.getTableName(), "_id=?", new String[]{String.valueOf(id)});
+                Log.d(TAG, "Delete taskID = " + taskID);
                 displayData();
             }
         });

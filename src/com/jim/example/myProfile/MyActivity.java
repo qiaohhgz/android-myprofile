@@ -21,61 +21,42 @@ public class MyActivity extends Activity implements View.OnClickListener {
     /**
      * Called when the activity is first created.
      */
-    private static final int SHOW_PICK_TIME_DIALOG = 0;
-    private static final int TIME_DIALOG_ID = 1;
+    private static String TAG;
 
-    private TextView timeView;
-    private Button pickTimeBtn;
     private Button startService;
     private Button stopService;
-    private Button gotoAddActivityBtn, gotoListActivityBtn;
-
-    private int mHour;
-    private int mMinute;
-    private ProfileBean profile;
-    private TimeEveryDayEvent timeEvent;
-    private Task soundTask;
+    private Button gotoAddActivityBtn, gotoListActivityBtn, gotoEventListActivity, gotoTaskListActivity;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        TAG = getClass().getName();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
         initializeViews();
-
-        createProfile();
-
-        //Test
-        createSoundTask(buildTestSoundBean());
-    }
-
-    private SoundSettingBean buildTestSoundBean() {
-        SoundSettingBean soundBean = new SoundSettingBean(5);
-        return soundBean;
     }
 
     private void initializeViews() {
-        timeView = (TextView) findViewById(R.id.timeView);
-        pickTimeBtn = (Button) findViewById(R.id.pickTimeBtn);
         startService = (Button) findViewById(R.id.startServiceBtn);
         stopService = (Button) findViewById(R.id.stopServiceBtn);
         gotoAddActivityBtn = (Button) findViewById(R.id.gotoAddProfileBtn);
-        gotoListActivityBtn = (Button) findViewById(R.id.gotoListProfileBtn);
+        gotoListActivityBtn = (Button) findViewById(R.id.gotoProfileList);
+        gotoEventListActivity = (Button) findViewById(R.id.gotoEventList);
+        gotoTaskListActivity = (Button) findViewById(R.id.gotoTaskList);
 
-        pickTimeBtn.setOnClickListener(this);
         startService.setOnClickListener(this);
         stopService.setOnClickListener(this);
         gotoAddActivityBtn.setOnClickListener(this);
         gotoListActivityBtn.setOnClickListener(this);
+        gotoEventListActivity.setOnClickListener(this);
+        gotoTaskListActivity.setOnClickListener(this);
 
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.pickTimeBtn:
-                showPickTimeDialog();
-                break;
             case R.id.startServiceBtn:
                 startService();
                 break;
@@ -85,8 +66,14 @@ public class MyActivity extends Activity implements View.OnClickListener {
             case R.id.gotoAddProfileBtn:
                 gotoAddProfile();
                 break;
-            case R.id.gotoListProfileBtn:
+            case R.id.gotoProfileList:
                 gotoListProfile();
+                break;
+            case R.id.gotoEventList:
+                startActivity(new Intent(this, ListEventActivity.class));
+                break;
+            case R.id.gotoTaskList:
+                startActivity(new Intent(this, ListTaskActivity.class));
                 break;
         }
     }
@@ -102,80 +89,47 @@ public class MyActivity extends Activity implements View.OnClickListener {
     }
 
     private void startService() {
-        i("start service...");
+        Log.i(TAG, "start service...");
         Intent i = new Intent(this, MyService.class);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startService(i);
     }
 
     private void stopService() {
-        i("stop service...");
+        Log.i(TAG, "stop service...");
         stopService(new Intent(this, MyService.class));
     }
 
-    private void createProfile() {
-        profile = new ProfileBean();
-    }
+//    private void showPickTimeDialog() {
+//        Message msg = new Message();
+//        msg.what = SHOW_PICK_TIME_DIALOG;
+//        dateAndTimeHandler.sendMessage(msg);
+//    }
 
-    private void createSoundTask(SoundSettingBean soundBean) {
-//        soundTask = new SoundTask(soundBean);
-        profile.addTask(soundTask);
-    }
+//    @Override
+//    protected Dialog onCreateDialog(int id) {
+//        switch (id) {
+//            case TIME_DIALOG_ID:
+//                if (timeEvent != null) {
+//                    mHour = timeEvent.getHour();
+//                    mMinute = timeEvent.getMinute();
+//                } else {
+//                    mHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+//                    mMinute = Calendar.getInstance().get(Calendar.MINUTE);
+//                }
+//                return new TimePickerDialog(this, timeSetListener, mHour, mMinute, true);
+//        }
+//        return null;
+//    }
 
-    private void showPickTimeDialog() {
-        //To change body of created methods use File | Settings | File Templates.
-        Message msg = new Message();
-        msg.what = SHOW_PICK_TIME_DIALOG;
-        dateAndTimeHandler.sendMessage(msg);
-    }
-
-    private TimePickerDialog.OnTimeSetListener timeSetListener = new TimePickerDialog.OnTimeSetListener() {
-        @Override
-        public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
-            createTimeEvent(hourOfDay, minute);
-            saveProfile();
-        }
-    };
-
-    private void saveProfile() {
-        i("save profile");
-        saveProfile();
-    }
-
-    private void createTimeEvent(int hourOfDay, int minute) {
-        timeView.setText(hourOfDay + ":" + minute);
-        timeEvent = new TimeEveryDayEvent(hourOfDay, minute);
-        profile.addEvent(timeEvent);
-    }
-
-    @Override
-    protected Dialog onCreateDialog(int id) {
-        switch (id) {
-            case TIME_DIALOG_ID:
-                if (timeEvent != null) {
-                    mHour = timeEvent.getHour();
-                    mMinute = timeEvent.getMinute();
-                } else {
-                    mHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
-                    mMinute = Calendar.getInstance().get(Calendar.MINUTE);
-                }
-                return new TimePickerDialog(this, timeSetListener, mHour, mMinute, true);
-        }
-        return null;
-    }
-
-    private void i(String message) {
-        Log.i(getClass().getName(), message);
-    }
-
-    Handler dateAndTimeHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case SHOW_PICK_TIME_DIALOG:
-                    showDialog(TIME_DIALOG_ID);
-                    break;
-            }
-        }
-    };
+//    Handler dateAndTimeHandler = new Handler() {
+//        @Override
+//        public void handleMessage(Message msg) {
+//            switch (msg.what) {
+//                case SHOW_PICK_TIME_DIALOG:
+//                    showDialog(TIME_DIALOG_ID);
+//                    break;
+//            }
+//        }
+//    };
 }

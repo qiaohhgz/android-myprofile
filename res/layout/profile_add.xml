@@ -13,16 +13,69 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/add_desc" android:layout_gravity="left|center_vertical" android:hint="@string/add_desc"/>
-    <ToggleButton
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lbl_disable"
+                android:id="@+id/lbl_disable"/>
+        <ToggleButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_disable" android:layout_gravity="left|center_vertical" android:enabled="true"
+                android:checked="false"/>
+    </LinearLayout>
+    <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/add_disable"
-            android:id="@+id/add_disable_Btn" android:layout_gravity="left|center_vertical" android:enabled="true"
-            android:checked="false" android:hint="@string/add_disable"/>
-    <Button
-            android:layout_width="72dp"
+            android:text="@string/add_event_label"
+            android:id="@+id/add_event_label"/>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+        <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:id="@+id/lbl_pick_time" android:layout_weight="1"/>
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_pick_time"
+                android:id="@+id/btn_pick_time"/>
+    </LinearLayout>
+    <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/add_save"
-            android:id="@+id/add_save_Btn" android:layout_gravity="center" android:gravity="center"/>
+            android:text="@string/task_sound_title"
+            android:id="@+id/textView1"/>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lbl_ring"
+                android:id="@+id/lbl_ring"/>
+        <SeekBar
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/seek_task_ring" android:indeterminate="false"/>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+        <Button
+                android:layout_width="72dp"
+                android:layout_height="wrap_content"
+                android:text="@string/add_save"
+                android:id="@+id/btn_save" android:layout_gravity="center" android:gravity="center"/>
+    </LinearLayout>
 </LinearLayout>
 

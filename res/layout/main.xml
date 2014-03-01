@@ -8,20 +8,6 @@
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/timeView"/>
-        <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/pick_time_btn"
-                android:id="@+id/pickTimeBtn" android:layout_gravity="center_horizontal|top"/>
-    </LinearLayout>
-    <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
         <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -36,12 +22,22 @@
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/add_title"
+            android:text="@string/add_profile_title"
             android:id="@+id/gotoAddProfileBtn" android:layout_gravity="left|center_vertical"/>
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/gotoList"
-            android:id="@+id/gotoListProfileBtn" android:layout_gravity="left|center_vertical"/>
+            android:text="@string/btn_goto_task_List"
+            android:id="@+id/gotoProfileList" android:layout_gravity="left|center_vertical"/>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_goto_event_list"
+            android:id="@+id/gotoEventList" android:layout_gravity="left|center_vertical"/>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_goto_task_list"
+            android:id="@+id/gotoTaskList" android:layout_gravity="left|center_vertical"/>
 </LinearLayout>
 

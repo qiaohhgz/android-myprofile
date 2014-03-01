@@ -10,8 +10,8 @@ import android.content.Context;
  * To change this template use File | Settings | File Templates.
  */
 public class TimeEveryDayDao extends BaseDao {
-    private static final String TABLE_NAME = "timeEveryDay";
-    private static final String CREATE_TABLE_SQL = "create table timeEveryDay(_id integer primary key autoincrement," +
+    private static final String TABLE_NAME = "timeEveryDayEvent";
+    private static final String CREATE_TABLE_SQL = "create table timeEveryDayEvent(_id integer primary key autoincrement," +
             "hour int,minute int, profileID int)";
     private static int TABLE_VERSION = 2;
 
