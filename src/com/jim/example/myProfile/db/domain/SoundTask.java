@@ -1,5 +1,7 @@
 package com.jim.example.myProfile.db.domain;
 
+import android.content.Context;
+import android.media.AudioManager;
 import android.util.Log;
 
 /**
@@ -9,7 +11,8 @@ import android.util.Log;
  * Time: 6:08 PM
  * To change this template use File | Settings | File Templates.
  */
-public class SoundTask implements Task {
+public class SoundTask {
+    private static final String TAG = SoundTask.class.getName();
     private int id;
     private int ring;
     private int profileID;
@@ -18,9 +21,11 @@ public class SoundTask implements Task {
 
     }
 
-    @Override
-    public void run() {
-        Log.d(getClass().getName(), "run");
+    public void run(Context context) {
+        Log.d(TAG, "Start sound task.");
+        AudioManager mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        mAudioManager.setStreamVolume(AudioManager.STREAM_RING, ring, 0);
+        Log.d(TAG, "End sound task.");
     }
 
     public int getId() {
@@ -37,5 +42,13 @@ public class SoundTask implements Task {
 
     public void setProfileID(int profileID) {
         this.profileID = profileID;
+    }
+
+    public int getRing() {
+        return ring;
+    }
+
+    public void setRing(int ring) {
+        this.ring = ring;
     }
 }

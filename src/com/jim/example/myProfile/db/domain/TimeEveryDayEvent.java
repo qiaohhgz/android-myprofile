@@ -1,5 +1,11 @@
 package com.jim.example.myProfile.db.domain;
 
+import android.util.Log;
+import com.jim.example.myProfile.util.DateUtils;
+
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Jim_qiao
@@ -8,6 +14,7 @@ package com.jim.example.myProfile.db.domain;
  * To change this template use File | Settings | File Templates.
  */
 public class TimeEveryDayEvent implements Event {
+    private static final String TAG = TimeEveryDayEvent.class.getName();
     private int id;
     private int hour;
     private int minute;
@@ -23,7 +30,13 @@ public class TimeEveryDayEvent implements Event {
 
     @Override
     public boolean check() {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        Calendar c = Calendar.getInstance();
+        int hourOfDay = c.get(Calendar.HOUR_OF_DAY);
+        int minute = c.get(Calendar.MINUTE);
+        Log.d(TAG, String.format("%s:%s", hourOfDay, minute));
+        boolean result = (hourOfDay >= hour && minute >= minute);
+        Log.d(TAG, "Check Result = " + result);
+        return result;
     }
 
     public int getId() {

@@ -1,5 +1,6 @@
 package com.jim.example.myProfile.facade;
 
+import android.database.Cursor;
 import com.jim.example.myProfile.bean.ProfileBean;
 
 import java.util.List;
@@ -11,7 +12,11 @@ import java.util.List;
  * Time: 下午5:45
  * To change this template use File | Settings | File Templates.
  */
-public class ProfileFacade {
+public interface IProfileFacade {
+    List<ProfileBean> getAll();
 
+    ProfileBean update(ProfileBean profileBean);
+
+    ProfileBean add(ProfileBean bean);
 
 }

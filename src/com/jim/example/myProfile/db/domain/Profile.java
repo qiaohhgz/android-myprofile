@@ -10,6 +10,8 @@ import java.util.Date;
  * To change this template use File | Settings | File Templates.
  */
 public class Profile {
+    public static final int ENABLED = 0;
+    public static final int DISABLED = 1;
     private int id;
     private String name;
     private String description;

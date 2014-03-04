@@ -18,9 +18,12 @@
     <string name="btn_pick_time">Pick Time</string>
     <string name="lbl_ring">Ring</string>
     <string name="lbl_disable">Disable</string>
-    <string name="list_event_title">Event List</string>
-    <string name="btn_goto_task_List">Profile List</string>
-    <string name="btn_goto_task_list">Task List</string>
-    <string name="btn_goto_event_list">Event List</string>
-    <string name="list_task_title">Task List</string>
+    <string name="list_event_title">Events</string>
+    <string name="btn_goto_task_List">Profiles</string>
+    <string name="btn_goto_task_list">Tasks</string>
+    <string name="btn_goto_event_list">Events</string>
+    <string name="list_task_title">Tasks</string>
+    <string name="disable">Disabled</string>
+    <string name="enable">Enabled</string>
+    <string name="delete_message">Really want to delete this record.</string>
 </resources>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">我的配置</string>
+    <string name="pick_time_btn">选择时间</string>
+    <string name="start_service">开始后台服务</string>
+    <string name="stop_service">停止后台服务</string>
+    <string name="add_name">名字</string>
+    <string name="add_desc">描述</string>
+    <string name="add_save">保存</string>
+    <string name="add_disable">禁用</string>
+    <string name="add_profile_title">增加配置</string>
+    <string name="list_profile_title">配置列表</string>
+    <string name="gotoAdd">增加</string>
+    <string name="add_event_label">增加事件</string>
+    <string name="time_save_btn">保存</string>
+    <string name="task_sound_title">任务列表</string>
+    <string name="task_ring_title">铃声</string>
+    <string name="btn_pick_time">选择时间</string>
+    <string name="lbl_ring">铃声</string>
+    <string name="lbl_disable">禁用</string>
+    <string name="list_event_title">事件列表</string>
+    <string name="btn_goto_task_List">配置列表</string>
+    <string name="btn_goto_task_list">任务列表</string>
+    <string name="btn_goto_event_list">事件列表</string>
+    <string name="list_task_title">任务列表</string>
+    <string name="disable">已经禁用</string>
+    <string name="enable">已经启用</string>
+    <string name="delete_message">真的要删除该记录吗？</string>
+</resources>

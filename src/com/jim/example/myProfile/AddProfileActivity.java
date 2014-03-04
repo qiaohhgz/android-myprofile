@@ -132,18 +132,29 @@ public class AddProfileActivity extends Activity implements View.OnClickListener
             return;
         }
 
-        // save profile
         SQLiteDatabase db = helper.getWritableDatabase();
-        long profileID = db.insert(TableMapping.Profile.getTableName(), null, buildProfile(name, desc, disable));
-        Log.d(TAG, "Save profile successful. ProfileID = " + profileID);
+        db.beginTransaction();
+        try {
+            // save profile
+            long profileID = db.insert(TableMapping.Profile.getTableName(), null, buildProfile(name, desc, disable));
+            Log.d(TAG, "Save profile successful. ProfileID = " + profileID);
 
-        // save event
-        db.insert(TableMapping.SoundTask.getTableName(), null, buildSoundTask(this.seekRing.getProgress(), (int) profileID));
-        Log.d(TAG, "Save sound successful.");
+            // save event
+            db.insert(TableMapping.SoundTask.getTableName(), null, buildSoundTask(this.seekRing.getProgress(), (int) profileID));
+            Log.d(TAG, "Save sound successful.");
 
-        // save task
-        db.insert(TableMapping.timeEveryDayEvent.getTableName(), null, buildTimeEvent((int) profileID, hourOfDay, minute));
-        Log.d(TAG, "Save event successful.");
+            // save task
+            db.insert(TableMapping.TimeEveryDayEvent.getTableName(), null, buildTimeEvent((int) profileID, hourOfDay, minute));
+            Log.d(TAG, "Save event successful.");
+
+            db.setTransactionSuccessful();
+        } catch (Exception ex) {
+            Log.e(TAG, ex.getMessage());
+            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT);
+            return;
+        } finally {
+            db.endTransaction();
+        }
 
         // start activity
         Log.d(TAG, "Go to List activity.");

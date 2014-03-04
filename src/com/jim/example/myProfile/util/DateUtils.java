@@ -23,6 +23,10 @@ public class DateUtils {
         return cal.getTime();
     }
 
+    public static Date getNow() {
+        return Calendar.getInstance().getTime();
+    }
+
     public static boolean beforeDate(Date early, Date late) {
         return early.before(late);
     }

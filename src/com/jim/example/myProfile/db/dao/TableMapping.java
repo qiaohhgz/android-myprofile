@@ -14,7 +14,7 @@ public enum TableMapping {
     SoundTask("SoundTask", "create table SoundTask(_id integer primary key autoincrement," +
             "ring int,profileID int)"),
 
-    timeEveryDayEvent("timeEveryDayEvent", "create table timeEveryDayEvent(_id integer primary key autoincrement," +
+    TimeEveryDayEvent("timeEveryDayEvent", "create table timeEveryDayEvent(_id integer primary key autoincrement," +
             "hour int,minute int, profileID int)");
 
     String tableName;

@@ -28,7 +28,7 @@ public class ListEventActivity extends ListActivity implements AdapterView.OnIte
     }
 
     private void displayData() {
-        Cursor query = helper.getReadableDatabase().query(TableMapping.timeEveryDayEvent.getTableName(), null, null, null, null, null, null);
+        Cursor query = helper.getReadableDatabase().query(TableMapping.TimeEveryDayEvent.getTableName(), null, null, null, null, null, null);
         String[] from = {"profileID", "hour", "minute"};
         int[] to = {R.id.item_event_profileID, R.id.item_event_hour, R.id.item_event_minute};
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.event_list_item, query, from, to);
@@ -44,24 +44,6 @@ public class ListEventActivity extends ListActivity implements AdapterView.OnIte
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, final long id) {
         Log.d(TAG, "item click");
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("真的要删除该记录吗？");
-        builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int which) {
-                int eventID = helper.getWritableDatabase().delete(TableMapping.timeEveryDayEvent.getTableName(), "_id=?", new String[]{String.valueOf(id)});
-                Log.d(TAG, "Delete eventID = " + eventID);
-                displayData();
-            }
-        });
-        builder.setNegativeButton("否", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int which) {
-                // no nothing
-            }
-        });
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
     }
 
     @Override

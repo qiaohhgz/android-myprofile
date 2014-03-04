@@ -51,24 +51,6 @@ public class ListTaskActivity extends ListActivity implements AdapterView.OnItem
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, final long id) {
         Log.d(TAG, "item click");
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("真的要删除该记录吗？");
-        builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int which) {
-                int taskID = helper.getWritableDatabase().delete(TableMapping.SoundTask.getTableName(), "_id=?", new String[]{String.valueOf(id)});
-                Log.d(TAG, "Delete taskID = " + taskID);
-                displayData();
-            }
-        });
-        builder.setNegativeButton("否", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int which) {
-                // no nothing
-            }
-        });
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
     }
 
     @Override

@@ -25,6 +25,8 @@
         <ToggleButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textOff="@string/enable"
+                android:textOn="@string/disable"
                 android:id="@+id/btn_disable" android:layout_gravity="left|center_vertical" android:enabled="true"
                 android:checked="false"/>
     </LinearLayout>
