@@ -48,7 +48,7 @@ public class ListHistoryActivity extends ListActivity {
 
         String[] from = {"level", "tag", "msg"};
         int[] to = {R.id.item_history_level, R.id.item_history_tag, R.id.item_history_msg};
-        Cursor cursor = helper.getReadableDatabase().rawQuery("select * from ?", StringUtils.toArray(TableMapping.History.getTableName()));
+        Cursor cursor = helper.getReadableDatabase().rawQuery("select * from " + TableMapping.History.getTableName(), null);
 
         Function levelFormat = new Function() {
             @Override
