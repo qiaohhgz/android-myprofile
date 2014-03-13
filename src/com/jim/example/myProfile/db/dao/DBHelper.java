@@ -16,14 +16,13 @@ import android.util.Log;
  */
 public final class DBHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "myProfile.db";
-    private static String TAG;
+    private static final String TAG = DBHelper.class.getSimpleName();
     private static int VERSION = 5;
 
     private SQLiteDatabase db;
 
     public DBHelper(Context context) {
         super(context, DB_NAME, null, VERSION);
-        TAG = getClass().getSimpleName();
     }
 
     @Override
@@ -36,11 +35,6 @@ public final class DBHelper extends SQLiteOpenHelper {
             Log.d(TAG, "Create successful.");
         }
     }
-
-    public SQLiteDatabase getDb() {
-        return db;
-    }
-
     @Override
     public synchronized void close() {
         super.close();

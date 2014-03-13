@@ -8,12 +8,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.Toast;
 
 public class MyActivity extends Activity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
     /**
      * Called when the activity is first created.
      */
     private static String TAG;
+    private static boolean isEnabledService = true;
 
     private Button gotoAddActivityBtn;
     private Button gotoListActivityBtn;
@@ -46,6 +48,9 @@ public class MyActivity extends Activity implements View.OnClickListener, Compou
 
         usingCbx = (CheckBox) findViewById(R.id.usingCbx);
         usingCbx.setOnCheckedChangeListener(this);
+        usingCbx.setChecked(isEnabledService);
+        changeService(isEnabledService);
+
     }
 
     @Override
@@ -86,18 +91,27 @@ public class MyActivity extends Activity implements View.OnClickListener, Compou
     }
 
     private void startService() {
-        Log.i(TAG, "start service...");
+        String msg = "start service...";
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT);
+        Log.i(TAG, msg);
         Intent i = new Intent(this, MyService.class);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startService(i);
     }
 
     private void stopService() {
-        Log.i(TAG, "stop service...");
+        String msg = "stop service...";
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT);
+        Log.i(TAG, msg);
         stopService(new Intent(this, MyService.class));
     }
 
     private void changeService(boolean enabled) {
+        if (enabled == isEnabledService) {
+            return;
+        }
+        Toast.makeText(this, "Change service " + enabled, Toast.LENGTH_SHORT);
+        isEnabledService = enabled;
         if (enabled) {
             startService();
         } else {

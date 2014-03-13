@@ -48,6 +48,7 @@ public class AddProfileActivity extends Activity implements View.OnClickListener
         setContentView(R.layout.profile_add);
 
         initializeViews();
+
     }
 
     private void initializeViews() {
@@ -135,7 +136,9 @@ public class AddProfileActivity extends Activity implements View.OnClickListener
 
         // check values
         if (name == null || name.length() == 0) {
-            Log.d(TAG, "Name is null.");
+            String msg = "Name is null.";
+            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+            Log.d(TAG, msg);
             return;
         }
 
@@ -146,20 +149,20 @@ public class AddProfileActivity extends Activity implements View.OnClickListener
             long profileID = db.insert(TableMapping.Profile.getTableName(), null, buildProfile(name, desc, disable));
             Log.d(TAG, "Save profile successful. ProfileID = " + profileID);
 
-            // save event
-            ContentValues soundTaskValues = buildSoundTask((int) profileID, seekRing.getProgress(),
-                    seekAlarm.getProgress(),seekMusic.getProgress(),seekVoiceCall.getProgress());
-            db.insert(TableMapping.SoundTask.getTableName(), null, soundTaskValues);
-            Log.d(TAG, "Save sound successful.");
-
             // save task
+            ContentValues soundTaskValues = buildSoundTask((int) profileID, seekRing.getProgress(),
+                    seekAlarm.getProgress(), seekMusic.getProgress(), seekVoiceCall.getProgress());
+            db.insert(TableMapping.SoundTask.getTableName(), null, soundTaskValues);
+            Log.d(TAG, "Save task successful.");
+
+            // save event
             db.insert(TableMapping.TimeEveryDayEvent.getTableName(), null, buildTimeEvent((int) profileID, hourOfDay, minute));
             Log.d(TAG, "Save event successful.");
 
             db.setTransactionSuccessful();
         } catch (Exception ex) {
             Log.e(TAG, ex.getMessage());
-            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT);
+            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
             return;
         } finally {
             db.endTransaction();

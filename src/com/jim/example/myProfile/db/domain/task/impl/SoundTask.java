@@ -1,8 +1,9 @@
-package com.jim.example.myProfile.db.domain;
+package com.jim.example.myProfile.db.domain.task.impl;
 
 import android.content.Context;
 import android.media.AudioManager;
 import android.util.Log;
+import com.jim.example.myProfile.db.domain.task.Task;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,7 +12,7 @@ import android.util.Log;
  * Time: 6:08 PM
  * To change this template use File | Settings | File Templates.
  */
-public class SoundTask {
+public class SoundTask implements Task {
     private static final String TAG = SoundTask.class.getName();
     private int id;
     private int profileID;
@@ -24,7 +25,7 @@ public class SoundTask {
 
     }
 
-    public void run(Context context) {
+    public void execute(Context context) {
         Log.d(TAG, "Start sound task.");
         AudioManager mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
 

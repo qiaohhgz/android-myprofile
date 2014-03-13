@@ -1,4 +1,6 @@
-package com.jim.example.myProfile.db.domain;
+package com.jim.example.myProfile.db.domain.event;
+
+import android.content.Context;
 
 /**
  * Created with IntelliJ IDEA.
@@ -9,5 +11,5 @@ package com.jim.example.myProfile.db.domain;
  */
 public interface Event {
 
-    boolean check();
+    boolean check(Context context);
 }

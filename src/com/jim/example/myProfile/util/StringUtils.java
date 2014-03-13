@@ -23,4 +23,12 @@ public class StringUtils {
         }
         return sb.toString();
     }
+
+    public static String[] toArray(Object... args) {
+        String[] array = new String[args.length];
+        for (int i = 0; i < array.length; i++) {
+            array[i] = String.valueOf(args[i]);
+        }
+        return array;
+    }
 }

@@ -1,4 +1,6 @@
-package com.jim.example.myProfile.db.domain;
+package com.jim.example.myProfile.db.domain.task;
+
+import android.content.Context;
 
 /**
  * Created with IntelliJ IDEA.
@@ -7,6 +9,6 @@ package com.jim.example.myProfile.db.domain;
  * Time: 5:35 PM
  * To change this template use File | Settings | File Templates.
  */
-public interface Task extends Runnable {
-
+public interface Task {
+    void execute(Context context);
 }

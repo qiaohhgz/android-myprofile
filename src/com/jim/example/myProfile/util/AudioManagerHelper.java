@@ -14,7 +14,7 @@ public class AudioManagerHelper {
 
     public void setStreamVolume(AudioManager mAudioManager, SeekBar seekBar, int streamType, int addMax) {
         int max = mAudioManager.getStreamMaxVolume(streamType) + addMax;
-        int current = mAudioManager.getStreamVolume(streamType);
+        int current = mAudioManager.getStreamVolume(streamType) + 1;
         seekBar.setMax(max);
         seekBar.setProgress(current);
     }

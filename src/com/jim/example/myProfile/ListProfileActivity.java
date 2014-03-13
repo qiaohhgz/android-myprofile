@@ -11,44 +11,83 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+import com.jim.example.myProfile.adapter.ProfileAdapter;
+import com.jim.example.myProfile.bean.ProfileBean;
 import com.jim.example.myProfile.db.dao.DBHelper;
 import com.jim.example.myProfile.db.dao.ProfileDao;
 import com.jim.example.myProfile.db.dao.TableMapping;
 import com.jim.example.myProfile.db.domain.Profile;
+import com.jim.example.myProfile.db.domain.event.Event;
+import com.jim.example.myProfile.db.domain.event.impl.TimeEveryDayEvent;
+import com.jim.example.myProfile.db.domain.task.Task;
+import com.jim.example.myProfile.db.domain.task.impl.SoundTask;
+import com.jim.example.myProfile.facade.IProfileFacade;
+import com.jim.example.myProfile.facade.ProfileFacade;
+import com.jim.example.myProfile.util.StringUtils;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ListProfileActivity extends ListActivity implements AdapterView.OnItemClickListener {
-    private static String TAG;
-    private DBHelper helper = new DBHelper(this);
+    private static final String TAG = ListProfileActivity.class.getSimpleName();
+    private DBHelper helper;
+    private IProfileFacade profileFacade;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        TAG = getClass().getSimpleName();
-
         super.onCreate(savedInstanceState);
+        this.helper = new DBHelper(this);
+        this.profileFacade = new ProfileFacade(this.helper);
 
         initializeViews();
 
         displayData();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        displayData();
+    }
+
     private void displayData() {
-        Cursor query = helper.getReadableDatabase().query(TableMapping.Profile.getTableName(), null, null, null, null, null, null);
+        List<Profile> profileList = profileFacade.getProfileList();
+
         String[] from = {"name", "description", "createDate", "disable"};
         int[] to = {R.id.item_name, R.id.item_desc, R.id.item_create_date, R.id.item_disable};
-        SimpleFunction sFun = new SimpleFunction();
-        Function disableFun = new Function() {
-            @Override
-            public void run(TextView v, String text) {
-                boolean isDisable = Integer.valueOf(text) == Profile.DISABLED;
-                if (isDisable) {
-                    v.setText(R.string.disable);
-                } else {
-                    v.setText(R.string.enable);
+        List<? extends Map<String, ?>> data = new ArrayList<Map<String, ?>>();
+        for (int i = 0; i < profileList.size(); i++) {
+            Profile profile = profileList.get(i);
+            ProfileBean bean = profileFacade.getProfileBean(profile.getId());
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put(from[0], profile.getName());
+            StringBuffer desc = new StringBuffer();
+            desc.append("Tasks:\n");
+            for (Task task : bean.getTasks()) {
+                if (task instanceof SoundTask) {
+                    SoundTask soundTask = (SoundTask) task;
+                    desc.append(String.format("Ring[%d],Alarm[%d],Music[%d],Call[%d] \n",
+                            soundTask.getRing(), soundTask.getAlarm(),
+                            soundTask.getMusic(), soundTask.getVoiceCall()));
                 }
             }
-        };
-        Function[] funs = new Function[]{sFun, sFun, sFun, disableFun};
-        getListView().setAdapter(new ProfileAdapter(this, R.layout.profile_list_item, query, from, to, funs));
+            desc.append("Events:\n");
+            for (Event event : bean.getEvents()) {
+                if (event instanceof TimeEveryDayEvent) {
+                    TimeEveryDayEvent dayEvent = (TimeEveryDayEvent) event;
+                    desc.append(String.format("Hour[%d],Minute[%d] \n",
+                            dayEvent.getHour(), dayEvent.getMinute()));
+                }
+            }
+            map.put(from[1], desc.toString());
+            map.put(from[2], profile.getCreateDate());
+            String disableValue = profile.isDisable() ? getResources().getString(R.string.disable) : getResources().getString(R.string.enable);
+            map.put(from[3], disableValue);
+        }
+        SimpleAdapter simpleAdapter = new SimpleAdapter(this, data, R.layout.profile_list_item, from, to);
+        getListView().setAdapter(simpleAdapter);
     }
 
 
@@ -66,7 +105,7 @@ public class ListProfileActivity extends ListActivity implements AdapterView.OnI
             public void onClick(DialogInterface dialogInterface, int which) {
                 int profileID = (int) id;
                 Log.d(TAG, "Delete profileID = " + profileID);
-                deleteProfile(profileID);
+                profileFacade.deleteProfile(profileID);
                 Log.d(TAG, "Display data.");
                 displayData();
             }
@@ -81,59 +120,9 @@ public class ListProfileActivity extends ListActivity implements AdapterView.OnI
         alertDialog.show();
     }
 
-    private void deleteProfile(int profileID) {
-        SQLiteDatabase db = helper.getWritableDatabase();
-        db.beginTransaction();
-        try {
-            String[] values = {String.valueOf(profileID)};
-            Log.d(TAG, "Delete profile ID = " + profileID);
-            db.delete(TableMapping.Profile.getTableName(), "_id=?", values);
-            Log.d(TAG, "Deleted profile successful.");
-            db.delete(TableMapping.TimeEveryDayEvent.getTableName(), "profileID=?", values);
-            Log.d(TAG, "Deleted event successful.");
-            db.delete(TableMapping.SoundTask.getTableName(), "profileID=?", values);
-            Log.d(TAG, "Deleted task successful.");
-            db.setTransactionSuccessful();
-        } catch (Exception ex) {
-            Log.e(TAG, ex.getMessage());
-        } finally {
-            db.endTransaction();
-        }
-    }
-
     @Override
     protected void onDestroy() {
-        super.onDestroy();    //To change body of overridden methods use File | Settings | File Templates.
+        super.onDestroy();
         helper.close();
-    }
-
-    public static class ProfileAdapter extends SimpleCursorAdapter {
-        private Function[] functions;
-        private int index;
-
-        public ProfileAdapter(Context context, int layout, Cursor c, String[] from, int[] to) {
-            super(context, layout, c, from, to);
-        }
-
-        public ProfileAdapter(Context context, int layout, Cursor c, String[] from, int[] to, Function[] functions) {
-            super(context, layout, c, from, to);
-            this.functions = functions;
-        }
-
-        @Override
-        public void setViewText(TextView v, String text) {
-            if (functions != null) {
-                Function fun = functions[index];
-                fun.run(v, text);
-                boolean isLast = index == (functions.length - 1);
-                if (isLast) {
-                    index = 0;
-                } else {
-                    index++;
-                }
-            } else {
-                super.setViewText(v, text);
-            }
-        }
     }
 }

@@ -1,4 +1,7 @@
-package com.jim.example.myProfile.db.domain;
+package com.jim.example.myProfile.db.domain.event.impl;
+
+import android.content.Context;
+import com.jim.example.myProfile.db.domain.event.Event;
 
 /**
  * Created with IntelliJ IDEA.
@@ -74,7 +77,7 @@ public class TimeRangeEvent implements Event {
     }
 
     @Override
-    public boolean check() {
+    public boolean check(Context context) {
         return false;  //TODO Writing check method
     }
 }

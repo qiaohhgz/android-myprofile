@@ -1,10 +1,10 @@
-package com.jim.example.myProfile.db.domain;
+package com.jim.example.myProfile.db.domain.event.impl;
 
+import android.content.Context;
 import android.util.Log;
-import com.jim.example.myProfile.util.DateUtils;
+import com.jim.example.myProfile.db.domain.event.Event;
 
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Created with IntelliJ IDEA.
@@ -29,7 +29,7 @@ public class TimeEveryDayEvent implements Event {
     }
 
     @Override
-    public boolean check() {
+    public boolean check(Context context) {
         Calendar c = Calendar.getInstance();
         int hourOfDay = c.get(Calendar.HOUR_OF_DAY);
         int minute = c.get(Calendar.MINUTE);
