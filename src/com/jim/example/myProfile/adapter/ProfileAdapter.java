@@ -8,7 +8,6 @@ import com.jim.example.myProfile.Function;
 
 /**
  * JimQiao
- * TODO
  * 14-3-13 下午12:01
  */
 public class ProfileAdapter extends SimpleCursorAdapter {

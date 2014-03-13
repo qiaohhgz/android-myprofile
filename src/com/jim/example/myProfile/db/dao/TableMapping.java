@@ -18,7 +18,10 @@ public enum TableMapping {
             "hour tinyint,minute tinyint, profileID int)"),
 
     TimeRangeEvent("timeRangeEvent", "create table timeRangeEvent(_id integer primary key autoincrement," +
-            "fromHourOfDay tinyint,fromMinute tinyint,toHourOfDay tinyint,toMinute tinyint, desc varchar(100), profileID int)");
+            "fromHourOfDay tinyint,fromMinute tinyint,toHourOfDay tinyint,toMinute tinyint, desc varchar(100), profileID int)"),
+
+    History("history", "create table history(_id integer primary key autoincrement," +
+                           "level tinyint,tag varchar(100),msg text)");
 
     String tableName;
     String createSql;

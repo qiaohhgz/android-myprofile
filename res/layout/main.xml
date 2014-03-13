@@ -35,5 +35,10 @@
             android:layout_height="wrap_content"
             android:text="@string/btn_goto_task_list"
             android:id="@+id/gotoTaskList" android:layout_gravity="left|center_vertical"/>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/goto_log_list"
+            android:id="@+id/gotoHistoryList" android:layout_gravity="left|center_vertical"/>
 </LinearLayout>
 

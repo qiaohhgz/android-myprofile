@@ -21,6 +21,7 @@ public class MyActivity extends Activity implements View.OnClickListener, Compou
     private Button gotoListActivityBtn;
     private Button gotoEventListActivity;
     private Button gotoTaskListActivity;
+    private Button gotoHistoryListActivity;
     private CheckBox usingCbx;
 
     @Override
@@ -46,6 +47,9 @@ public class MyActivity extends Activity implements View.OnClickListener, Compou
         gotoTaskListActivity = (Button) findViewById(R.id.gotoTaskList);
         gotoTaskListActivity.setOnClickListener(this);
 
+        gotoHistoryListActivity = (Button) findViewById(R.id.gotoHistoryList);
+        gotoHistoryListActivity.setOnClickListener(this);
+
         usingCbx = (CheckBox) findViewById(R.id.usingCbx);
         usingCbx.setOnCheckedChangeListener(this);
         usingCbx.setChecked(isEnabledService);
@@ -67,6 +71,9 @@ public class MyActivity extends Activity implements View.OnClickListener, Compou
                 break;
             case R.id.gotoTaskList:
                 startActivity(new Intent(this, ListTaskActivity.class));
+                break;
+            case R.id.gotoHistoryList:
+                startActivity(new Intent(this, ListHistoryActivity.class));
                 break;
         }
     }
@@ -91,8 +98,8 @@ public class MyActivity extends Activity implements View.OnClickListener, Compou
     }
 
     private void startService() {
-        String msg = "start service...";
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT);
+        String msg = getResources().getString(R.string.start_service);
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
         Log.i(TAG, msg);
         Intent i = new Intent(this, MyService.class);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -100,8 +107,8 @@ public class MyActivity extends Activity implements View.OnClickListener, Compou
     }
 
     private void stopService() {
-        String msg = "stop service...";
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT);
+        String msg = getResources().getString(R.string.stop_service);
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
         Log.i(TAG, msg);
         stopService(new Intent(this, MyService.class));
     }
@@ -110,7 +117,7 @@ public class MyActivity extends Activity implements View.OnClickListener, Compou
         if (enabled == isEnabledService) {
             return;
         }
-        Toast.makeText(this, "Change service " + enabled, Toast.LENGTH_SHORT);
+        Toast.makeText(this, getResources().getString(R.string.change_service) + enabled, Toast.LENGTH_SHORT).show();
         isEnabledService = enabled;
         if (enabled) {
             startService();

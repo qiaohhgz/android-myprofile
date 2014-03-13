@@ -31,4 +31,11 @@
     <string name="lbl_voice_call">通话</string>
 
     <string name="using">启用</string>
+    <string name="change_service">改变服务状态</string>
+    <string name="sound_task_summary_format" formatted="false">铃声[%d],闹钟[%d],媒体[%d],电话[%d]</string>
+    <string name="time_event_summary_format" formatted="false">[%d]:[%d]时执行</string>
+    <string name="yes">是</string>
+    <string name="no">否</string>
+    <string name="goto_log_list">查看日志</string>
+    <string name="list_history_title">日志详情</string>
 </resources>

@@ -2,7 +2,6 @@ package com.jim.example.myProfile.facade;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 import com.jim.example.myProfile.bean.ProfileBean;
 import com.jim.example.myProfile.db.dao.DBHelper;
 import com.jim.example.myProfile.db.dao.TableMapping;
@@ -26,10 +25,12 @@ import java.util.List;
  */
 public class ProfileFacade implements IProfileFacade {
     private static final String TAG = ProfileFacade.class.getSimpleName();
+    private ILog Log;
     private DBHelper dbHelper;
 
     public ProfileFacade(DBHelper dbHelper) {
         this.dbHelper = dbHelper;
+        this.Log = new HistoryFacade(this.dbHelper);
     }
 
     @Override
