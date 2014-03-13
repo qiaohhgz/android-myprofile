@@ -14,8 +14,11 @@ import android.util.Log;
 public class SoundTask {
     private static final String TAG = SoundTask.class.getName();
     private int id;
-    private int ring;
     private int profileID;
+    private int ring;
+    private int alarm;
+    private int music;
+    private int voiceCall;
 
     public SoundTask() {
 
@@ -24,7 +27,12 @@ public class SoundTask {
     public void run(Context context) {
         Log.d(TAG, "Start sound task.");
         AudioManager mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+
         mAudioManager.setStreamVolume(AudioManager.STREAM_RING, ring, 0);
+        mAudioManager.setStreamVolume(AudioManager.STREAM_ALARM, alarm, 0);
+        mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, music, 0);
+        mAudioManager.setStreamVolume(AudioManager.STREAM_VOICE_CALL, voiceCall, 0);
+
         Log.d(TAG, "End sound task.");
     }
 
@@ -50,5 +58,29 @@ public class SoundTask {
 
     public void setRing(int ring) {
         this.ring = ring;
+    }
+
+    public int getAlarm() {
+        return alarm;
+    }
+
+    public void setAlarm(int alarm) {
+        this.alarm = alarm;
+    }
+
+    public int getMusic() {
+        return music;
+    }
+
+    public void setMusic(int music) {
+        this.music = music;
+    }
+
+    public int getVoiceCall() {
+        return voiceCall;
+    }
+
+    public void setVoiceCall(int voiceCall) {
+        this.voiceCall = voiceCall;
     }
 }

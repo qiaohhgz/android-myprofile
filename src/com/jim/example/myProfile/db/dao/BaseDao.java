@@ -21,7 +21,7 @@ public abstract class BaseDao extends SQLiteOpenHelper {
 
     public BaseDao(Context context, int version) {
         super(context, DB_NAME, null, version);
-        TAG = getClass().getName();
+        TAG = getClass().getSimpleName();
     }
 
     @Override

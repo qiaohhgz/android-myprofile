@@ -1,9 +1,5 @@
 package com.jim.example.myProfile.facade;
 
-import com.jim.example.myProfile.bean.ProfileBean;
-
-import java.util.List;
-
 /**
  * Created with IntelliJ IDEA.
  * User: Jim_qiao

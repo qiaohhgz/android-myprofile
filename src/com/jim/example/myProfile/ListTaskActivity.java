@@ -25,7 +25,7 @@ public class ListTaskActivity extends ListActivity implements AdapterView.OnItem
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        TAG = getClass().getName();
+        TAG = getClass().getSimpleName();
 
         super.onCreate(savedInstanceState);
 

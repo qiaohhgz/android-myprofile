@@ -22,7 +22,7 @@ public class ListProfileActivity extends ListActivity implements AdapterView.OnI
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        TAG = getClass().getName();
+        TAG = getClass().getSimpleName();
 
         super.onCreate(savedInstanceState);
 

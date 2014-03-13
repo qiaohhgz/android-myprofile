@@ -1,10 +1,5 @@
 package com.jim.example.myProfile.facade;
 
-import android.database.Cursor;
-import com.jim.example.myProfile.bean.ProfileBean;
-
-import java.util.List;
-
 /**
  * Created with IntelliJ IDEA.
  * User: Jim_qiao
@@ -13,10 +8,6 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public interface IProfileFacade {
-    List<ProfileBean> getAll();
 
-    ProfileBean update(ProfileBean profileBean);
-
-    ProfileBean add(ProfileBean bean);
 
 }

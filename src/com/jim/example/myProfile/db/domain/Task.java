@@ -8,5 +8,5 @@ package com.jim.example.myProfile.db.domain;
  * To change this template use File | Settings | File Templates.
  */
 public interface Task extends Runnable {
-    int getId();
+
 }

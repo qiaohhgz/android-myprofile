@@ -23,7 +23,7 @@ public final class DBHelper extends SQLiteOpenHelper {
 
     public DBHelper(Context context) {
         super(context, DB_NAME, null, VERSION);
-        TAG = getClass().getName();
+        TAG = getClass().getSimpleName();
     }
 
     @Override

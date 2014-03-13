@@ -18,7 +18,7 @@ public class ListEventActivity extends ListActivity implements AdapterView.OnIte
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        TAG = getClass().getName();
+        TAG = getClass().getSimpleName();
 
         super.onCreate(savedInstanceState);
 
