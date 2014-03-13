@@ -1,23 +1,15 @@
 package com.jim.example.myProfile;
 
 import android.app.Activity;
-import android.app.Dialog;
-import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.TimePicker;
-import com.jim.example.myProfile.db.domain.*;
-import com.jim.example.myProfile.bean.ProfileBean;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 
-import java.util.Calendar;
-
-public class MyActivity extends Activity implements View.OnClickListener {
+public class MyActivity extends Activity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
     /**
      * Called when the activity is first created.
      */
@@ -26,10 +18,11 @@ public class MyActivity extends Activity implements View.OnClickListener {
     private Button startService;
     private Button stopService;
     private Button gotoAddActivityBtn, gotoListActivityBtn, gotoEventListActivity, gotoTaskListActivity;
+    private CheckBox usingCbx;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        TAG = getClass().getName();
+        TAG = getClass().getSimpleName();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
@@ -44,6 +37,7 @@ public class MyActivity extends Activity implements View.OnClickListener {
         gotoListActivityBtn = (Button) findViewById(R.id.gotoProfileList);
         gotoEventListActivity = (Button) findViewById(R.id.gotoEventList);
         gotoTaskListActivity = (Button) findViewById(R.id.gotoTaskList);
+        usingCbx = (CheckBox) findViewById(R.id.usingCbx);
 
         startService.setOnClickListener(this);
         stopService.setOnClickListener(this);
@@ -52,6 +46,7 @@ public class MyActivity extends Activity implements View.OnClickListener {
         gotoEventListActivity.setOnClickListener(this);
         gotoTaskListActivity.setOnClickListener(this);
 
+        usingCbx.setOnCheckedChangeListener(this);
     }
 
     @Override
@@ -78,6 +73,15 @@ public class MyActivity extends Activity implements View.OnClickListener {
         }
     }
 
+    @Override
+    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+        switch (compoundButton.getId()) {
+            case R.id.usingCbx:
+                changeService(b);
+                break;
+        }
+    }
+
     private void gotoListProfile() {
         Intent i = new Intent(this, ListProfileActivity.class);
         startActivity(i);
@@ -98,6 +102,14 @@ public class MyActivity extends Activity implements View.OnClickListener {
     private void stopService() {
         Log.i(TAG, "stop service...");
         stopService(new Intent(this, MyService.class));
+    }
+
+    private void changeService(boolean enabled) {
+        if (enabled) {
+            startService();
+        } else {
+            stopService();
+        }
     }
 
 //    private void showPickTimeDialog() {
