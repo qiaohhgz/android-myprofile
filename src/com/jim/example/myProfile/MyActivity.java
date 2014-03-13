@@ -15,9 +15,10 @@ public class MyActivity extends Activity implements View.OnClickListener, Compou
      */
     private static String TAG;
 
-    private Button startService;
-    private Button stopService;
-    private Button gotoAddActivityBtn, gotoListActivityBtn, gotoEventListActivity, gotoTaskListActivity;
+    private Button gotoAddActivityBtn;
+    private Button gotoListActivityBtn;
+    private Button gotoEventListActivity;
+    private Button gotoTaskListActivity;
     private CheckBox usingCbx;
 
     @Override
@@ -31,33 +32,25 @@ public class MyActivity extends Activity implements View.OnClickListener, Compou
     }
 
     private void initializeViews() {
-        startService = (Button) findViewById(R.id.startServiceBtn);
-        stopService = (Button) findViewById(R.id.stopServiceBtn);
         gotoAddActivityBtn = (Button) findViewById(R.id.gotoAddProfileBtn);
-        gotoListActivityBtn = (Button) findViewById(R.id.gotoProfileList);
-        gotoEventListActivity = (Button) findViewById(R.id.gotoEventList);
-        gotoTaskListActivity = (Button) findViewById(R.id.gotoTaskList);
-        usingCbx = (CheckBox) findViewById(R.id.usingCbx);
-
-        startService.setOnClickListener(this);
-        stopService.setOnClickListener(this);
         gotoAddActivityBtn.setOnClickListener(this);
+
+        gotoListActivityBtn = (Button) findViewById(R.id.gotoProfileList);
         gotoListActivityBtn.setOnClickListener(this);
+
+        gotoEventListActivity = (Button) findViewById(R.id.gotoEventList);
         gotoEventListActivity.setOnClickListener(this);
+
+        gotoTaskListActivity = (Button) findViewById(R.id.gotoTaskList);
         gotoTaskListActivity.setOnClickListener(this);
 
+        usingCbx = (CheckBox) findViewById(R.id.usingCbx);
         usingCbx.setOnCheckedChangeListener(this);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.startServiceBtn:
-                startService();
-                break;
-            case R.id.stopServiceBtn:
-                stopService();
-                break;
             case R.id.gotoAddProfileBtn:
                 gotoAddProfile();
                 break;
@@ -112,36 +105,4 @@ public class MyActivity extends Activity implements View.OnClickListener, Compou
         }
     }
 
-//    private void showPickTimeDialog() {
-//        Message msg = new Message();
-//        msg.what = SHOW_PICK_TIME_DIALOG;
-//        dateAndTimeHandler.sendMessage(msg);
-//    }
-
-//    @Override
-//    protected Dialog onCreateDialog(int id) {
-//        switch (id) {
-//            case TIME_DIALOG_ID:
-//                if (timeEvent != null) {
-//                    mHour = timeEvent.getHour();
-//                    mMinute = timeEvent.getMinute();
-//                } else {
-//                    mHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
-//                    mMinute = Calendar.getInstance().get(Calendar.MINUTE);
-//                }
-//                return new TimePickerDialog(this, timeSetListener, mHour, mMinute, true);
-//        }
-//        return null;
-//    }
-
-//    Handler dateAndTimeHandler = new Handler() {
-//        @Override
-//        public void handleMessage(Message msg) {
-//            switch (msg.what) {
-//                case SHOW_PICK_TIME_DIALOG:
-//                    showDialog(TIME_DIALOG_ID);
-//                    break;
-//            }
-//        }
-//    };
 }

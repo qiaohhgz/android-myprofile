@@ -14,16 +14,6 @@
                 android:text="@string/using"
                 android:checked="false"
                 android:id="@+id/usingCbx" android:layout_gravity="left|center_vertical"/>
-        <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/start_service"
-                android:id="@+id/startServiceBtn"/>
-        <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/stop_service"
-                android:id="@+id/stopServiceBtn"/>
     </LinearLayout>
     <Button
             android:layout_width="wrap_content"
