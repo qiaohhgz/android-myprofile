@@ -8,6 +8,12 @@
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
+        <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/using"
+                android:checked="false"
+                android:id="@+id/usingCbx" android:layout_gravity="left|center_vertical"/>
         <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

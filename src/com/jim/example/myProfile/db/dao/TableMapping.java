@@ -9,13 +9,16 @@ package com.jim.example.myProfile.db.dao;
  */
 public enum TableMapping {
     Profile("profile", "create table profile(_id integer primary key autoincrement," +
-            "name text,description text, createDate datetime, disable bit)"),
+            "name varchar(50),description varchar(100), createDate datetime, disable bit)"),
 
     SoundTask("SoundTask", "create table SoundTask(_id integer primary key autoincrement," +
-            "ring int,profileID int)"),
+            "ring tinyint,alarm tinyint,music tinyint,voiceCall tinyint,profileID int)"),
 
     TimeEveryDayEvent("timeEveryDayEvent", "create table timeEveryDayEvent(_id integer primary key autoincrement," +
-            "hour int,minute int, profileID int)");
+            "hour tinyint,minute tinyint, profileID int)"),
+
+    TimeRangeEvent("timeRangeEvent", "create table timeRangeEvent(_id integer primary key autoincrement," +
+            "fromHourOfDay tinyint,fromMinute tinyint,toHourOfDay tinyint,toMinute tinyint, desc varchar(100), profileID int)");
 
     String tableName;
     String createSql;

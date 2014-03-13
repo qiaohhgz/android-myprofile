@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import com.jim.example.myProfile.db.dao.*;
+import com.jim.example.myProfile.util.AudioManagerHelper;
 import com.jim.example.myProfile.util.DateUtils;
 
 import java.text.SimpleDateFormat;
@@ -20,7 +21,8 @@ import java.util.Date;
 
 public class AddProfileActivity extends Activity implements View.OnClickListener {
     private static String TAG;
-    private DBHelper helper = new DBHelper(this);
+    private DBHelper dbHelper = new DBHelper(this);
+    private AudioManagerHelper audioManagerHelper = new AudioManagerHelper();
 
     private EditText nameET, descET;
     private ToggleButton disableTB;
@@ -31,14 +33,16 @@ public class AddProfileActivity extends Activity implements View.OnClickListener
     private TimePickerDialog.OnTimeSetListener timeSetListener;
     private int hourOfDay, minute;
 
-    private TextView lblRing;
     private SeekBar seekRing;
+    private SeekBar seekAlarm;
+    private SeekBar seekMusic;
+    private SeekBar seekVoiceCall;
 
     private Button addBtn;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        TAG = getClass().getName();
+        TAG = getClass().getSimpleName();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_add);
@@ -59,8 +63,10 @@ public class AddProfileActivity extends Activity implements View.OnClickListener
         initTimePickerDialog();
 
         // Task
-        lblRing = (TextView) findViewById(R.id.lbl_ring);
         this.seekRing = (SeekBar) findViewById(R.id.seek_task_ring);
+        this.seekAlarm = (SeekBar) findViewById(R.id.seek_task_alarm);
+        this.seekMusic = (SeekBar) findViewById(R.id.seek_task_music);
+        this.seekVoiceCall = (SeekBar) findViewById(R.id.seek_task_voice_call);
         loadRingData();
 
         // Save button
@@ -70,12 +76,13 @@ public class AddProfileActivity extends Activity implements View.OnClickListener
 
     private void loadRingData() {
         AudioManager mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-        int max = mAudioManager.getStreamMaxVolume(AudioManager.STREAM_RING);
-        int current = mAudioManager.getStreamVolume(AudioManager.STREAM_RING);
-        this.seekRing.setMax(max);
-        this.seekRing.setProgress(current);
-        Log.d(TAG, "Ring max : " + max + " current : " + current);
+
+        audioManagerHelper.setStreamVolume(mAudioManager, seekRing, AudioManager.STREAM_RING, 1);
+        audioManagerHelper.setStreamVolume(mAudioManager, seekAlarm, AudioManager.STREAM_ALARM);
+        audioManagerHelper.setStreamVolume(mAudioManager, seekMusic, AudioManager.STREAM_MUSIC);
+        audioManagerHelper.setStreamVolume(mAudioManager, seekVoiceCall, AudioManager.STREAM_VOICE_CALL);
     }
+
 
     private void initTimePickerDialog() {
         Calendar c = Calendar.getInstance();
@@ -132,7 +139,7 @@ public class AddProfileActivity extends Activity implements View.OnClickListener
             return;
         }
 
-        SQLiteDatabase db = helper.getWritableDatabase();
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
         db.beginTransaction();
         try {
             // save profile
@@ -140,7 +147,9 @@ public class AddProfileActivity extends Activity implements View.OnClickListener
             Log.d(TAG, "Save profile successful. ProfileID = " + profileID);
 
             // save event
-            db.insert(TableMapping.SoundTask.getTableName(), null, buildSoundTask(this.seekRing.getProgress(), (int) profileID));
+            ContentValues soundTaskValues = buildSoundTask((int) profileID, seekRing.getProgress(),
+                    seekAlarm.getProgress(),seekMusic.getProgress(),seekVoiceCall.getProgress());
+            db.insert(TableMapping.SoundTask.getTableName(), null, soundTaskValues);
             Log.d(TAG, "Save sound successful.");
 
             // save task
@@ -170,10 +179,13 @@ public class AddProfileActivity extends Activity implements View.OnClickListener
         return values;
     }
 
-    private ContentValues buildSoundTask(int ring, int profileID) {
+    private ContentValues buildSoundTask(int profileID, int ring, int alarm, int music, int voiceCall) {
         ContentValues values = new ContentValues();
-        values.put("ring", ring);
         values.put("profileID", profileID);
+        values.put("ring", ring);
+        values.put("alarm", alarm);
+        values.put("music", music);
+        values.put("voiceCall", voiceCall);
         return values;
     }
 
@@ -190,7 +202,7 @@ public class AddProfileActivity extends Activity implements View.OnClickListener
     @Override
     protected void onDestroy() {
         super.onDestroy();    //To change body of overridden methods use File | Settings | File Templates.
-        Log.i(TAG, "helper closing...");
-        helper.close();
+        Log.i(TAG, "dbHelper closing...");
+        dbHelper.close();
     }
 }

@@ -26,4 +26,9 @@
     <string name="disable">已经禁用</string>
     <string name="enable">已经启用</string>
     <string name="delete_message">真的要删除该记录吗？</string>
+    <string name="lbl_alarm">闹钟</string>
+    <string name="lbl_music">媒体</string>
+    <string name="lbl_voice_call">通话</string>
+
+    <string name="using">启用</string>
 </resources>

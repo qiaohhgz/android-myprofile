@@ -26,4 +26,7 @@
     <string name="disable">Disabled</string>
     <string name="enable">Enabled</string>
     <string name="delete_message">Really want to delete this record.</string>
+    <string name="lbl_alarm">Alarm</string>
+    <string name="lbl_music">Music</string>
+    <string name="lbl_voice_call">Call</string>
 </resources>
