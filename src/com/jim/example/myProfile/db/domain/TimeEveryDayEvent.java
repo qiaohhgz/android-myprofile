@@ -34,7 +34,7 @@ public class TimeEveryDayEvent implements Event {
         int hourOfDay = c.get(Calendar.HOUR_OF_DAY);
         int minute = c.get(Calendar.MINUTE);
         Log.d(TAG, String.format("%s:%s", hourOfDay, minute));
-        boolean result = (hourOfDay >= hour && minute >= minute);
+        boolean result = (hourOfDay == hour && minute == minute);
         Log.d(TAG, "Check Result = " + result);
         return result;
     }
