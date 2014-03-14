@@ -70,6 +70,8 @@
         <SeekBar
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:paddingLeft="5dip"
+                android:paddingRight="40dip"
                 android:id="@+id/seek_task_ring" android:indeterminate="false"/>
     </LinearLayout>
     <!-- alarm section -->
@@ -85,6 +87,8 @@
         <SeekBar
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:paddingLeft="5dip"
+                android:paddingRight="40dip"
                 android:id="@+id/seek_task_alarm" android:indeterminate="false"/>
     </LinearLayout>
     <!-- music section -->
@@ -100,6 +104,8 @@
         <SeekBar
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:paddingLeft="5dip"
+                android:paddingRight="40dip"
                 android:id="@+id/seek_task_music" android:indeterminate="false"/>
     </LinearLayout>
     <!-- voice call section -->
@@ -115,6 +121,8 @@
         <SeekBar
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:paddingLeft="5dip"
+                android:paddingRight="40dip"
                 android:id="@+id/seek_task_voice_call" android:indeterminate="false"/>
     </LinearLayout>
     <!-- save section -->

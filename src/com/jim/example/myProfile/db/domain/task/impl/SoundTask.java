@@ -30,9 +30,13 @@ public class SoundTask implements Task {
         AudioManager mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
 
         mAudioManager.setStreamVolume(AudioManager.STREAM_RING, ring, 0);
+        Log.d("AudioManagerHelper", "Ring: ");
         mAudioManager.setStreamVolume(AudioManager.STREAM_ALARM, alarm, 0);
+        Log.d("AudioManagerHelper", "Alarm: ");
         mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, music, 0);
+        Log.d("AudioManagerHelper", "Music: ");
         mAudioManager.setStreamVolume(AudioManager.STREAM_VOICE_CALL, voiceCall, 0);
+        Log.d("AudioManagerHelper", "Call: ");
 
         Log.d(TAG, "End sound task.");
     }

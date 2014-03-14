@@ -14,25 +14,38 @@
             </intent-filter>
         </activity>
         <activity android:name=".AddProfileActivity"
-                  android:label="@string/add_profile_title"
-                ></activity>
+                  android:label="@string/add_profile_title">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
         <activity android:name=".ListProfileActivity"
-                  android:label="@string/list_profile_title"
-                ></activity>
+                  android:label="@string/list_profile_title">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
         <activity android:name=".ListEventActivity"
-                  android:label="@string/list_event_title"
-                ></activity>
+                  android:label="@string/list_event_title">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
         <activity android:name=".ListTaskActivity"
-                  android:label="@string/list_task_title"
-                ></activity>
+                  android:label="@string/list_task_title">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
         <activity android:name=".ListHistoryActivity"
-                  android:label="@string/list_history_title"
-                ></activity>
-        <service
-                android:name=".MyService"
-                android:exported="true"
-                android:process=":remote"
-                >
+                  android:label="@string/list_history_title">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+        <service android:name=".MyService"
+                 android:exported="true"
+                 android:process=":remote">
         </service>
     </application>
 </manifest> 

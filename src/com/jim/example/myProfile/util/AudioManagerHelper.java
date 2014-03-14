@@ -1,6 +1,7 @@
 package com.jim.example.myProfile.util;
 
 import android.media.AudioManager;
+import android.util.Log;
 import android.widget.SeekBar;
 
 /**
@@ -17,5 +18,6 @@ public class AudioManagerHelper {
         int current = mAudioManager.getStreamVolume(streamType) + 1;
         seekBar.setMax(max);
         seekBar.setProgress(current);
+        Log.d("AudioManagerHelper", "Current: " + current + " Max:" + max);
     }
 }
